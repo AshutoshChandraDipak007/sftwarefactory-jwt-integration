@@ -1,6 +1,5 @@
 package com.org.jwt.pkg.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,5 @@ public class EmployeeController {
 		emp.setId(1234);		
 		return empService.getEmployee();		
 	}
-	
-	@GetMapping("getLoggedInUser")
-	public Principal getLoggedInUser(Principal principal) {
-		return principal;		
-	}
+		
 }

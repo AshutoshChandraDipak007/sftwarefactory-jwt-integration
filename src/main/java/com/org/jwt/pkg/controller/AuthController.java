@@ -1,5 +1,7 @@
 package com.org.jwt.pkg.controller;
 
+import java.security.Principal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,6 +43,11 @@ public class AuthController {
 		String token = this.helper.generateToken(userDetails);
 		JwtResponse response = JwtResponse.builder().jwtToken(token).username(userDetails.getUsername()).build();
 		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	
+	@GetMapping("getLoggedInUser")
+	public Principal getLoggedInUser(Principal principal) {
+		return principal;		
 	}
 
 	private void doAuthenticate(String email, String password) {
