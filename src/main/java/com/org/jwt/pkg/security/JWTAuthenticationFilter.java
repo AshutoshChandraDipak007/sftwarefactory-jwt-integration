@@ -43,6 +43,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter{
 	        
 	        if (requestHeader != null && requestHeader.startsWith("Bearer")) {
 	            //looking good
+	        	
 	            token = requestHeader.substring(7);
 	            try {
 	                username = this.jwtHelper.getUsernameFromToken(token);
@@ -65,7 +66,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter{
 	            logger.info("Invalid Header Value !! ");
 	        }
 		
-
 	        //
 	        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 	            //fetch user detail from username
